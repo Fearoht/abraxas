@@ -1,3 +1,2 @@
-from .io import output
-from .io import input
+from . import io
 
