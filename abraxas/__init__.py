@@ -1,3 +1,3 @@
-from .io import out
-from .io import in
+from .io import output
+from .io import input
 
