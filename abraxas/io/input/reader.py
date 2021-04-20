@@ -42,17 +42,17 @@ class DataReader:
         except OSError:
             pass
         else:
-            dataframe.to_csv(path + "/" + folder + "/" + filename + ".csv",compression=None)
+            dataframe.to_csv(path + "/" + folder + "/" + filename + ".zip",compression='zip')
 
     def _disk_loading_csv(self, filename="", folder="", index="Target"):
         path = os.getcwd()
         filename = path + "/" + folder + "/" + filename
         try:
-            input = open(filename + '.csv', 'r')
+            input = open(filename + '.zip', 'r')
         except OSError:
             return False, pd.DataFrame()
         else:
-            df = pd.read_csv(filename+".csv")
+            df = pd.read_csv(filename+".zip")
             df = df.set_index(index)
             return True, df
 
