@@ -41,18 +41,18 @@ class DataReader:
                 os.mkdir(path + "/" + folder)
         except OSError:
             pass
-        else:
-            dataframe.to_csv(path + "/" + folder + "/" + filename + ".zip",compression='zip')
+        else:            
+            dataframe.to_excel(path + "/" + folder + "/" + filename  + ".xls")
 
     def _disk_loading_csv(self, filename="", folder="", index="Target"):
         path = os.getcwd()
         filename = path + "/" + folder + "/" + filename
         try:
-            input = open(filename + '.zip', 'r')
+            input = open(filename + '.xls', 'r')
         except OSError:
             return False, pd.DataFrame()
         else:
-            df = pd.read_csv(filename+".zip")
+            df = pd.read_excel(filename+".xls")
             df = df.set_index(index)
             return True, df
 
