@@ -42,7 +42,7 @@ class DataReader:
         except OSError:
             pass
         else:
-            dataframe.to_csv(path + "/" + folder + "/" + filename + ".csv")
+            dataframe.to_csv(path + "/" + folder + "/" + filename + ".csv",compression=None)
 
     def _disk_loading_csv(self, filename="", folder="", index="Target"):
         path = os.getcwd()
