@@ -119,7 +119,7 @@ class DataReader:
             df = df.set_index(index)
             return True, df
 
-    def __init__(self, file="",index="Target", format="pkl"):
+    def __init__(self, file="",index="Target", format="pkl", folder_path=""):
         file_path = file
         path = ""
         file = file.split("/")
@@ -132,29 +132,29 @@ class DataReader:
         valid_file = False
         self.df = pd.DataFrame()
         if format == "pkl":
-            valid_file, self.df = self._disk_loading_pkl(filename=file, folder="datasets")
+            valid_file, self.df = self._disk_loading_pkl(filename=file, folder=folder_path + "datasets")
         elif format == "csv":
-            valid_file, self.df = self._disk_loading_csv(filename=file, folder="csv", index=index)
+            valid_file, self.df = self._disk_loading_csv(filename=file, folder=folder_path + "csv", index=index)
         elif format == "data":
-            valid_file, self.df = self._disk_loading_data(filename=file, folder="data", index=index)
+            valid_file, self.df = self._disk_loading_data(filename=file, folder=folder_path + "data", index=index)
         
         if not valid_file:
             if ext == "csv":
                 if path != "":
-                    valid_file, self.df = self._disk_loading_csv_online(filename=path, folder="", index=index)
+                    valid_file, self.df = self._disk_loading_csv_online(filename=path, folder=folder_path, index=index)
                 else:    
-                    valid_file, self.df = self._disk_loading_csv(filename=file, folder="", index=index)
+                    valid_file, self.df = self._disk_loading_csv(filename=file, folder=folder_path, index=index)
             elif ext == "data":
-                valid_file, self.df = self._disk_loading_data(filename=file, folder="", index=index)
+                valid_file, self.df = self._disk_loading_data(filename=file, folder=folder_path, index=index)
             self._disk_saving_pkl(
                 dataframe = self.df,
-                filename = file, folder="datasets")
+                filename = file, folder=folder_path+"datasets")
             self._disk_saving_csv(
                 dataframe = self.df,
-                filename = file, folder="csv")
+                filename = file, folder=folder_path+"csv")
             self._disk_saving_data(
                 dataframe = self.df,
-                filename = file, folder="data")
+                filename = file, folder=folder_path+"data")
 
     def gather(self):
         return self.df.copy()
